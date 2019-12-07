@@ -10,63 +10,38 @@ var quizNextQuestionButton = document.getElementById(
 var quizScore = document.getElementById('quiz__score-text-value');
 
 var quiz = {
-  sets: [
-    {
-      question: 'What does HTML stands for?',
-      options: [
-        'Hypertext Machine language.',
-        'Hypertext and links markup language.',
-        'Hypertext Markup Language.',
-        'Hightext machine language.'
-      ],
-      answer: 3
-    },
-    {
-      question: 'How is document type initialized in HTML5.?',
-      options: [
-        '<xmp></DOCTYPE HTML></xmp>',
-        '<xmp></DOCTYPE></xmp>',
-        '<xmp><!DOCTYPE html></xmp>',
-        '<xmp></DOCTYPE html></xmp>'
-      ],
-      answer: 3
-    },
-    {
-      question:
-        'Which of the following HTML Elements is used for making any text bold ? ',
-      options: [
-        '<xmp><p></xmp>',
-        '<xmp><i></xmp>',
-        '<xmp><li></xmp>',
-        '<xmp><b></xmp>'
-      ],
-      answer: 4
-    },
-    {
-      question:
-        'Which of the following HTML element is used for creating an unordered list? ',
-      options: [
-        '<xmp><ui></xmp>',
-        '<xmp><i></xmp>',
-        '<xmp><em></xmp>',
-        '<xmp><ul></xmp>'
-      ],
-      answer: 4
-    }
-  ],
+  quizIntroduction: function() {
+    quizQuestion.innerHTML =
+      'Welcome in my Quiz! Click button below and starting.';
+    this.quizAnswersDisplayNone();
+    quizNextQuestionButton.innerHTML = 'START';
+    this.setIndex -= 1;
+  },
+  sets: [],
   setIndex: 0,
   score: 0,
   loadQuizSet: function() {
-    quizQuestion.innerHTML = this.sets[this.setIndex].question;
-    quizAnswer1.innerHTML = this.sets[this.setIndex].options[0];
-    quizAnswer2.innerHTML = this.sets[this.setIndex].options[1];
-    quizAnswer3.innerHTML = this.sets[this.setIndex].options[2];
-    quizAnswer4.innerHTML = this.sets[this.setIndex].options[3];
-    quizScore.innerHTML = this.score + '/' + this.sets.length;
-  },
-  nextQuestion: function() {
-    this.setIndex += 1;
-    this.loadQuizSet();
+    quizAnswer1.style.display = 'block';
+    quizAnswer2.style.display = 'block';
+    quizAnswer3.style.display = 'block';
+    quizAnswer4.style.display = 'block';
+    if (this.setIndex <= this.sets.length - 1) {
+      quizQuestion.innerHTML =
+        this.setIndex + 1 + '. ' + this.sets[this.setIndex].question;
+      quizAnswer1.innerHTML = this.sets[this.setIndex].options[0];
+      quizAnswer2.innerHTML = this.sets[this.setIndex].options[1];
+      quizAnswer3.innerHTML = this.sets[this.setIndex].options[2];
+      quizAnswer4.innerHTML = this.sets[this.setIndex].options[3];
+      quizNextQuestionButton.innerHTML = 'Next question';
+    } else {
+      quizQuestion.innerHTML = 'Quiz over!';
+      this.quizAnswersDisplayNone();
+      quizNextQuestionButton.style.display = 'none';
+      quizScore.innerHTML = 'Score: ' + this.score + ' / ' + this.sets.length;
+    }
+    if (this.setIndex === this.sets.length - 1) {
+      quizNextQuestionButton.innerHTML = 'Look score';
+    }
   },
   checkAnswer: function(answerId) {
     var id = answerId.split('');
@@ -77,11 +52,14 @@ var quiz = {
     if (id[id.length - 1] == this.sets[this.setIndex].answer) {
       console.log('GOOD');
       this.score += 1;
-      this.quizScoreRefresh();
       console.log('Score +' + this.score);
     } else {
       console.log('BAD');
     }
+  },
+  nextQuestion: function() {
+    this.setIndex += 1;
+    this.loadQuizSet();
   },
   answerNotClickable: function() {
     var quizAnswers = quizAllAnswers;
@@ -95,12 +73,18 @@ var quiz = {
       quizAnswers[number].style.pointerEvents = 'auto';
     }
   },
-  quizScoreRefresh: function() {
-    quizScore.innerHTML = this.score + '/' + this.sets.length;
+  quizAnswersDisplayNone: function() {
+    quizAnswer1.style.display = 'none';
+    quizAnswer2.style.display = 'none';
+    quizAnswer3.style.display = 'none';
+    quizAnswer4.style.display = 'none';
   }
 };
+window.onload = quiz.quizIntroduction();
 
-window.onload = quiz.loadQuizSet();
+import { set1, set2, set3, set4 } from './quiz-sets';
+
+quiz.sets.push(set1, set2, set3, set4);
 
 var quizAnswers = quizAllAnswers;
 for (var number = 0; number < quizAnswers.length; number += 1) {
