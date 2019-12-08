@@ -12,7 +12,7 @@
     <section class="quiz grid">
         <div class="quiz__container grid__column">
             <div class=quiz__content>
-                <h1 class="section-title">Quiz</h1>
+                <h1 class="section-title">Knowledge test</h1>
                 <div class="quiz__question" id="quiz__question"></div>
                 <div class="quiz__answers">
                     <ul class="quiz__answers-list">
@@ -22,8 +22,24 @@
                         <li class="quiz__answers-list-item" id="quiz__answers-list-item-4"></li>
                     </ul>
                 </div>
+                <div class="quiz__answer-information">
+                    <div class="quiz__answer-information-icons-box">
+                        <i class="quiz__answer-information-icon-good fas fa-check"
+                            id="quiz__answer-information-icon-good">
+                            Correct</i>
+                        <i class="quiz__answer-information-icon-bad fas fa-times"
+                            id="quiz__answer-information-icon-bad">
+                            Wrong</i>
+                    </div>
+                    <div class="quiz__answer-information-text-box" id="quiz__answer-information-text-box">
+                        <p class="quiz__answer-information-text">Correct answer:</p>
+                        <p class="quiz__answer-information-text-correct-answer"
+                            id="quiz__answer-information-text-correct-answer"></p>
+                    </div>
+                </div>
                 <div class="quiz__next-question">
-                    <button class="quiz__next-question-button" id="quiz__next-question-button"></button>
+                    <button class="quiz__next-question-button quiz__next-question-button--width"
+                        id="quiz__next-question-button"></button>
                 </div>
                 <div class="quiz__score">
                     <p class="quiz__score-text">

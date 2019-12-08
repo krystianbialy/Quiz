@@ -4,6 +4,18 @@ var quizAnswer2 = document.getElementById('quiz__answers-list-item-2');
 var quizAnswer3 = document.getElementById('quiz__answers-list-item-3');
 var quizAnswer4 = document.getElementById('quiz__answers-list-item-4');
 var quizAllAnswers = [quizAnswer1, quizAnswer2, quizAnswer3, quizAnswer4];
+var quizAnswerGood = document.getElementById(
+  'quiz__answer-information-icon-good'
+);
+var quizAnswerBad = document.getElementById(
+  'quiz__answer-information-icon-bad'
+);
+var quizAnswerInformationTextBox = document.getElementById(
+  'quiz__answer-information-text-box'
+);
+var quizCorrectAnswer = document.getElementById(
+  'quiz__answer-information-text-correct-answer'
+);
 var quizNextQuestionButton = document.getElementById(
   'quiz__next-question-button'
 );
@@ -14,6 +26,9 @@ var quiz = {
     quizQuestion.innerHTML =
       'Welcome in my Quiz! Click button below and starting.';
     this.quizAnswersDisplayNone();
+    quizNextQuestionButton.classList.remove(
+      'quiz__next-question-button--width'
+    );
     quizNextQuestionButton.innerHTML = 'START';
     this.setIndex -= 1;
   },
@@ -32,6 +47,7 @@ var quiz = {
       quizAnswer2.innerHTML = this.sets[this.setIndex].options[1];
       quizAnswer3.innerHTML = this.sets[this.setIndex].options[2];
       quizAnswer4.innerHTML = this.sets[this.setIndex].options[3];
+      quizNextQuestionButton.classList.add('quiz__next-question-button--width');
       quizNextQuestionButton.innerHTML = 'Next question';
     } else {
       quizQuestion.innerHTML = 'Quiz over!';
@@ -45,20 +61,23 @@ var quiz = {
   },
   checkAnswer: function(answerId) {
     var id = answerId.split('');
-    var test1 = id[id.length - 1];
-    var test2 = this.sets[this.setIndex].answer;
-    console.log(test1);
-    console.log(test2);
+    var correctAnswer = this.sets[this.setIndex].answer;
     if (id[id.length - 1] == this.sets[this.setIndex].answer) {
-      console.log('GOOD');
+      quizAnswerGood.style.display = 'block';
       this.score += 1;
-      console.log('Score +' + this.score);
     } else {
-      console.log('BAD');
+      quizAnswerBad.style.display = 'block';
+      quizAnswerInformationTextBox.style.display = 'block';
+      quizCorrectAnswer.innerHTML = this.sets[this.setIndex].options[
+        correctAnswer - 1
+      ];
     }
   },
   nextQuestion: function() {
     this.setIndex += 1;
+    quizAnswerGood.style.display = 'none';
+    quizAnswerBad.style.display = 'none';
+    quizAnswerInformationTextBox.style.display = 'none';
     this.loadQuizSet();
   },
   answerNotClickable: function() {

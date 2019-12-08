@@ -10,6 +10,7 @@ Project is created with:
 * Webpack v4.38.0
 * ESLint v6.1.0
 * Prettier v1.18.2
+* Fontawesome v5.11.2
 * MobileFirst
 * RWD
 

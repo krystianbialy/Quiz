@@ -9,7 +9,7 @@ var set1 = {
   answer: 3
 };
 var set2 = {
-  question: 'How is document type initialized in HTML5.?',
+  question: 'How is document type initialized in HTML5?',
   options: [
     '<xmp></DOCTYPE HTML></xmp>',
     '<xmp></DOCTYPE></xmp>',
