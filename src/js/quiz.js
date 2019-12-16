@@ -20,11 +20,13 @@ var quizNextQuestionButton = document.getElementById(
   'quiz__next-question-button'
 );
 var quizScore = document.getElementById('quiz__score-text-value');
+var quizRefresh = document.getElementById('quiz__refresh');
+var quizRefreshButton = document.getElementById('quiz__refresh-button');
 
 var quiz = {
   quizIntroduction: function() {
     quizQuestion.innerHTML =
-      'Welcome in my Quiz! Click button below and starting.';
+      'Welcome in my Quiz! Click button below and start.';
     this.quizAnswersDisplayNone();
     quizNextQuestionButton.classList.remove(
       'quiz__next-question-button--width'
@@ -53,7 +55,9 @@ var quiz = {
       quizQuestion.innerHTML = 'Quiz over!';
       this.quizAnswersDisplayNone();
       quizNextQuestionButton.style.display = 'none';
+      quizScore.style.display = 'block';
       quizScore.innerHTML = 'Score: ' + this.score + ' / ' + this.sets.length;
+      quizRefresh.style.display = 'block';
     }
     if (this.setIndex === this.sets.length - 1) {
       quizNextQuestionButton.innerHTML = 'Look score';
@@ -117,4 +121,13 @@ for (var number = 0; number < quizAnswers.length; number += 1) {
 quizNextQuestionButton.onclick = function() {
   quiz.nextQuestion();
   quiz.answerClickable();
+};
+
+quizRefreshButton.onclick = function() {
+  quiz.setIndex = 0;
+  quiz.score = 0;
+  quizScore.style.display = 'none';
+  quizRefresh.style.display = 'none';
+  quiz.loadQuizSet();
+  quizNextQuestionButton.style.display = 'block';
 };

@@ -9,8 +9,8 @@
 </head>
 
 <body>
-    <section class="quiz grid">
-        <div class="quiz__container grid__column">
+    <section class="quiz">
+        <div class="quiz__container">
             <div class=quiz__content>
                 <h1 class="section-title">Knowledge test</h1>
                 <div class="quiz__question" id="quiz__question"></div>
@@ -26,15 +26,18 @@
                     <div class="quiz__answer-information-icons-box">
                         <i class="quiz__answer-information-icon-good fas fa-check"
                             id="quiz__answer-information-icon-good">
-                            Correct</i>
+                            Correct
+                        </i>
                         <i class="quiz__answer-information-icon-bad fas fa-times"
                             id="quiz__answer-information-icon-bad">
-                            Wrong</i>
+                            Wrong
+                        </i>
                     </div>
                     <div class="quiz__answer-information-text-box" id="quiz__answer-information-text-box">
                         <p class="quiz__answer-information-text">Correct answer:</p>
                         <p class="quiz__answer-information-text-correct-answer"
-                            id="quiz__answer-information-text-correct-answer"></p>
+                            id="quiz__answer-information-text-correct-answer">
+                        </p>
                     </div>
                 </div>
                 <div class="quiz__next-question">
@@ -45,6 +48,12 @@
                     <p class="quiz__score-text">
                         <span id="quiz__score-text-value"></span>
                     </p>
+                </div>
+                <div class="quiz__refresh" id="quiz__refresh">
+                    <button class="quiz__refresh-button" id="quiz__refresh-button">
+                        <i class="quiz__refresh-button-icon fas fa-undo-alt"></i>
+                        Start again
+                    </button>
                 </div>
             </div>
         </div>
